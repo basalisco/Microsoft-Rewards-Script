@@ -39,7 +39,6 @@ if (influxConfig?.version && influxConfig.version !== 0) {
  * Scrive i punti correnti su InfluxDB
  */
 export async function writePoints(account: Account, points: number, log: LogFunction, pointType: 'initial' | 'final') {
-    // Il controllo corretto che non usa la variabile "isEnabled"
     if (!influxConfig?.version || influxConfig.version === 0 || !influxClient) {
         return;
     }
