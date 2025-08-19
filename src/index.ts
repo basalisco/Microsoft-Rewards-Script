@@ -172,7 +172,7 @@ export class MicrosoftRewardsBot {
         log(this.isMobile, 'MAIN-POINTS', `You can earn ${this.pointsCanCollect} points today`)
         
             //influx//
-            if (typeof this.pointsInitial === 'number' && this.pointsInitial != 0) { {
+            if (typeof this.pointsInitial === 'number' && this.pointsInitial != 0) {
             writePoints(account, this.pointsInitial, this.log, 'initial');
             }
             
@@ -250,7 +250,7 @@ export class MicrosoftRewardsBot {
         log(this.isMobile, 'MAIN-POINTS', `You can earn ${this.pointsCanCollect} points today (Browser: ${browserEnarablePoints.mobileSearchPoints} points, App: ${appEarnablePoints.totalEarnablePoints} points)`)
 
         //influx//
-            if (typeof afterPointAmount === 'number' && afterPointAmount !== 0) {
+            if (typeof afterPointAmount === 'number' && afterPointAmount != 0) {
             writePoints(account, this.pointsInitial, this.log, 'initial');
             }
 
