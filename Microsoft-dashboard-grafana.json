@@ -1,47 +1,4 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_MICROSOFT",
-      "label": "Microsoft",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "influxdb",
-      "pluginName": "InfluxDB"
-    }
-  ],
-  "__elements": {},
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "barchart",
-      "name": "Bar chart",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "12.0.0"
-    },
-    {
-      "type": "datasource",
-      "id": "influxdb",
-      "name": "InfluxDB",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "piechart",
-      "name": "Pie chart",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -54,31 +11,20 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
-        "type": "dashboard"
-      },
-      {
-        "datasource": {
-          "type": "influxdb",
-          "uid": "${DS_MICROSOFT}"
-        },
-        "enable": true,
-        "hide": false,
-        "iconColor": "red",
-        "name": "New annotation",
         "target": {
-          "fromAnnotations": true,
-          "query": "SHOW TAG VALUES WITH KEY = \"email\"",
-          "rawQuery": true,
-          "refId": "Anno",
-          "textEditor": true
-        }
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
       }
     ]
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
+  "id": 16,
   "links": [
     {
       "asDropdown": false,
@@ -97,7 +43,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_MICROSOFT}"
+        "uid": "aes81al11le68e"
       },
       "fieldConfig": {
         "defaults": {
@@ -130,7 +76,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -171,12 +118,12 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_MICROSOFT}"
+            "uid": "aes81al11le68e"
           },
           "hide": false,
           "query": "SELECT first(\"points\") AS \"Iniziale\" FROM \"microsoft\"..\"reward_points\" WHERE \"type\" = 'initial' AND $timeFilter GROUP BY \"email\"\n",
@@ -187,7 +134,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_MICROSOFT}"
+            "uid": "aes81al11le68e"
           },
           "hide": false,
           "query": "SELECT last(\"points\") AS \"Finale\" FROM \"microsoft\"..\"reward_points\" WHERE \"type\" = 'final' AND $timeFilter GROUP BY \"email\"\n",
@@ -203,6 +150,33 @@
           "options": {
             "byField": "email",
             "mode": "outer"
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": "0"
+                  }
+                },
+                "fieldName": "Iniziale"
+              },
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": "0"
+                  }
+                },
+                "fieldName": "Finale"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
           }
         },
         {
@@ -271,7 +245,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_MICROSOFT}"
+        "uid": "aes81al11le68e"
       },
       "fieldConfig": {
         "defaults": {
@@ -324,12 +298,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_MICROSOFT}"
+            "uid": "aes81al11le68e"
           },
           "groupBy": [
             {
@@ -369,6 +343,12 @@
               "key": "email::tag",
               "operator": "=~",
               "value": "/^$email$/"
+            },
+            {
+              "condition": "AND",
+              "key": "type::tag",
+              "operator": "=",
+              "value": "final"
             }
           ]
         }
@@ -379,7 +359,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "${DS_MICROSOFT}"
+        "uid": "aes81al11le68e"
       },
       "fieldConfig": {
         "defaults": {
@@ -424,7 +404,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -458,12 +439,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "${DS_MICROSOFT}"
+            "uid": "aes81al11le68e"
           },
           "groupBy": [
             {
@@ -510,6 +491,12 @@
               "key": "email::tag",
               "operator": "=~",
               "value": "/^$email$/"
+            },
+            {
+              "condition": "AND",
+              "key": "type::tag",
+              "operator": "=",
+              "value": "final"
             }
           ]
         }
@@ -518,15 +505,23 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
         "datasource": {
           "type": "influxdb",
-          "uid": "${DS_MICROSOFT}"
+          "uid": "aes81al11le68e"
         },
         "definition": "SHOW TAG VALUES WITH KEY = \"email\"",
         "includeAll": true,
@@ -546,13 +541,12 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Microsoft",
-  "uid": "549452f0-0eac-4713-a9cb-4800d4a73f8c",
-  "version": 53,
-  "weekStart": ""
+  "title": "Microsoft Copy",
+  "uid": "87bc1018-a94a-426d-a7e0-bfcb48e15543",
+  "version": 1
 }
