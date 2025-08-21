@@ -250,9 +250,9 @@ export class MicrosoftRewardsBot {
         log(this.isMobile, 'MAIN-POINTS', `You can earn ${this.pointsCanCollect} points today (Browser: ${browserEnarablePoints.mobileSearchPoints} points, App: ${appEarnablePoints.totalEarnablePoints} points)`)
 
         //influx//
-            if (typeof afterPointAmount === 'number') {
-            writePoints(account, this.pointsInitial, this.log, 'initial');
-            }
+        //    if (typeof afterPointAmount === 'number') {
+        //    writePoints(account, this.pointsInitial, this.log, 'initial');
+        //    }
 
         // If runOnZeroPoints is false and 0 points to earn, don't continue
         if (!this.config.runOnZeroPoints && this.pointsCanCollect === 0) {
